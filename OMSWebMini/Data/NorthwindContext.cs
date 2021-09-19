@@ -26,7 +26,6 @@ namespace OMSWebMini.Data
         public virtual DbSet<OrderDetail> OrderDetails { get; set; }
         public virtual DbSet<Product> Products { get; set; }
         public virtual DbSet<Shipper> Shippers { get; set; }
-        public virtual DbSet<Statistic> Statistics { get; set; }
         public virtual DbSet<Supplier> Suppliers { get; set; }
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
@@ -291,24 +290,6 @@ namespace OMSWebMini.Data
                     .HasMaxLength(40);
 
                 entity.Property(e => e.Phone).HasMaxLength(24);
-            });
-
-            modelBuilder.Entity<Statistic>(entity =>
-            {
-                entity.Property(e => e.Id)
-                    .ValueGeneratedNever()
-                    .HasColumnName("ID");
-
-                entity.Property(e => e.Key)
-                    .HasMaxLength(50)
-                    .IsFixedLength(true);
-
-                entity.Property(e => e.StatisticName)
-                    .IsRequired()
-                    .HasMaxLength(50)
-                    .IsFixedLength(true);
-
-                entity.Property(e => e.Value).HasColumnType("decimal(18, 10)");
             });
 
             modelBuilder.Entity<Supplier>(entity =>
