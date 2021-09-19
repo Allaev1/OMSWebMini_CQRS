@@ -1,56 +1,69 @@
 ﻿{
+   "CodeGenerationMode": 0,
    "ContextClassName": "NorthwindContext",
    "ContextNamespace": null,
    "DefaultDacpacSchema": null,
-   "DoNotCombineNamespace": false,
-   "IdReplace": false,
+   "FilterSchemas": false,
    "IncludeConnectionString": true,
    "ModelNamespace": null,
    "OutputContextPath": "Data",
    "OutputPath": "Model",
-   "ProjectRootNamespace": "AllaevOMSWebMini",
+   "ProjectRootNamespace": "OMSWebMini",
+   "Schemas": null,
    "SelectedHandlebarsLanguage": 0,
    "SelectedToBeGenerated": 0,
    "Tables": [
       {
-         "HasPrimaryKey": true,
-         "Name": "[dbo].[Categories]"
+         "Name": "[dbo].[Categories]",
+         "ObjectType": 0
       },
       {
-         "HasPrimaryKey": true,
-         "Name": "[dbo].[Customers]"
+         "Name": "[dbo].[Customers]",
+         "ObjectType": 0
       },
       {
-         "HasPrimaryKey": true,
-         "Name": "[dbo].[Employees]"
+         "Name": "[dbo].[Employees]",
+         "ObjectType": 0
       },
       {
-         "HasPrimaryKey": true,
-         "Name": "[dbo].[Order Details]"
+         "Name": "[dbo].[Order Details]",
+         "ObjectType": 0
       },
       {
-         "HasPrimaryKey": true,
-         "Name": "[dbo].[Orders]"
+         "Name": "[dbo].[Orders]",
+         "ObjectType": 0
       },
       {
-         "HasPrimaryKey": true,
-         "Name": "[dbo].[Products]"
+         "Name": "[dbo].[Products]",
+         "ObjectType": 0
       },
       {
-         "HasPrimaryKey": true,
-         "Name": "[dbo].[Shippers]"
+         "Name": "[dbo].[Shippers]",
+         "ObjectType": 0
       },
       {
-         "HasPrimaryKey": true,
-         "Name": "[dbo].[Suppliers]"
+         "Name": "[dbo].[Statistics]",
+         "ObjectType": 0
+      },
+      {
+         "Name": "[dbo].[Suppliers]",
+         "ObjectType": 0
       }
    ],
+   "UiHint": "ALLAEV\\SQLEXPRESS.Northwind",
+   "UseBoolPropertiesWithoutDefaultSql": false,
    "UseDatabaseNames": false,
    "UseDbContextSplitting": false,
    "UseFluentApiOnly": true,
    "UseHandleBars": false,
    "UseInflector": true,
    "UseLegacyPluralizer": false,
+   "UseNoConstructor": false,
+   "UseNoDefaultConstructor": false,
+   "UseNoNavigations": false,
+   "UseNoObjectFilter": false,
    "UseNodaTime": false,
+   "UseNullableReferences": false,
+   "UseSchemaFolders": false,
    "UseSpatial": false
 }
