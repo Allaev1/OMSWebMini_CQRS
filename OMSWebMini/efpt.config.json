@@ -22,6 +22,10 @@
          "ObjectType": 0
       },
       {
+         "Name": "[dbo].[CustomersByCountries]",
+         "ObjectType": 0
+      },
+      {
          "Name": "[dbo].[Employees]",
          "ObjectType": 0
       },
@@ -34,7 +38,31 @@
          "ObjectType": 0
       },
       {
+         "Name": "[dbo].[OrdersByCountries]",
+         "ObjectType": 0
+      },
+      {
          "Name": "[dbo].[Products]",
+         "ObjectType": 0
+      },
+      {
+         "Name": "[dbo].[ProductsByCategories]",
+         "ObjectType": 0
+      },
+      {
+         "Name": "[dbo].[PurchasesByCustomers]",
+         "ObjectType": 0
+      },
+      {
+         "Name": "[dbo].[SalesByCategories]",
+         "ObjectType": 0
+      },
+      {
+         "Name": "[dbo].[SalesByCountries]",
+         "ObjectType": 0
+      },
+      {
+         "Name": "[dbo].[SalesByEmployees]",
          "ObjectType": 0
       },
       {
@@ -42,7 +70,7 @@
          "ObjectType": 0
       },
       {
-         "Name": "[dbo].[Statistics]",
+         "Name": "[dbo].[Summaries]",
          "ObjectType": 0
       },
       {

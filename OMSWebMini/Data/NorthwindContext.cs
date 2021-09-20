@@ -21,11 +21,19 @@ namespace OMSWebMini.Data
 
         public virtual DbSet<Category> Categories { get; set; }
         public virtual DbSet<Customer> Customers { get; set; }
+        public virtual DbSet<CustomersByCountry> CustomersByCountries { get; set; }
         public virtual DbSet<Employee> Employees { get; set; }
         public virtual DbSet<Order> Orders { get; set; }
         public virtual DbSet<OrderDetail> OrderDetails { get; set; }
+        public virtual DbSet<OrdersByCountry> OrdersByCountries { get; set; }
         public virtual DbSet<Product> Products { get; set; }
+        public virtual DbSet<ProductsByCategory> ProductsByCategories { get; set; }
+        public virtual DbSet<PurchasesByCustomer> PurchasesByCustomers { get; set; }
+        public virtual DbSet<SalesByCategory> SalesByCategories { get; set; }
+        public virtual DbSet<SalesByCountry> SalesByCountries { get; set; }
+        public virtual DbSet<SalesByEmployee> SalesByEmployees { get; set; }
         public virtual DbSet<Shipper> Shippers { get; set; }
+        public virtual DbSet<Summary> Summaries { get; set; }
         public virtual DbSet<Supplier> Suppliers { get; set; }
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
@@ -83,6 +91,16 @@ namespace OMSWebMini.Data
                 entity.Property(e => e.PostalCode).HasMaxLength(10);
 
                 entity.Property(e => e.Region).HasMaxLength(15);
+            });
+
+            modelBuilder.Entity<CustomersByCountry>(entity =>
+            {
+                entity.HasNoKey();
+
+                entity.Property(e => e.CountryName)
+                    .IsRequired()
+                    .HasMaxLength(100)
+                    .IsFixedLength(true);
             });
 
             modelBuilder.Entity<Employee>(entity =>
@@ -236,6 +254,16 @@ namespace OMSWebMini.Data
                     .HasConstraintName("FK_Order_Details_Products");
             });
 
+            modelBuilder.Entity<OrdersByCountry>(entity =>
+            {
+                entity.HasNoKey();
+
+                entity.Property(e => e.CountryName)
+                    .IsRequired()
+                    .HasMaxLength(100)
+                    .IsFixedLength(true);
+            });
+
             modelBuilder.Entity<Product>(entity =>
             {
                 entity.HasIndex(e => e.CategoryId, "CategoriesProducts");
@@ -281,6 +309,64 @@ namespace OMSWebMini.Data
                     .HasConstraintName("FK_Products_Suppliers");
             });
 
+            modelBuilder.Entity<ProductsByCategory>(entity =>
+            {
+                entity.HasNoKey();
+
+                entity.Property(e => e.CategoryName)
+                    .IsRequired()
+                    .HasMaxLength(100)
+                    .IsFixedLength(true);
+            });
+
+            modelBuilder.Entity<PurchasesByCustomer>(entity =>
+            {
+                entity.HasNoKey();
+
+                entity.Property(e => e.CompanyName)
+                    .IsRequired()
+                    .HasMaxLength(100)
+                    .IsFixedLength(true);
+
+                entity.Property(e => e.Purchases).HasColumnType("decimal(18, 10)");
+            });
+
+            modelBuilder.Entity<SalesByCategory>(entity =>
+            {
+                entity.HasNoKey();
+
+                entity.Property(e => e.CategoryName)
+                    .IsRequired()
+                    .HasMaxLength(100)
+                    .IsFixedLength(true);
+
+                entity.Property(e => e.Sales).HasColumnType("decimal(18, 10)");
+            });
+
+            modelBuilder.Entity<SalesByCountry>(entity =>
+            {
+                entity.HasNoKey();
+
+                entity.Property(e => e.CountryName)
+                    .IsRequired()
+                    .HasMaxLength(100)
+                    .IsFixedLength(true);
+
+                entity.Property(e => e.Sales).HasColumnType("decimal(18, 10)");
+            });
+
+            modelBuilder.Entity<SalesByEmployee>(entity =>
+            {
+                entity.HasNoKey();
+
+                entity.Property(e => e.LastName)
+                    .IsRequired()
+                    .HasMaxLength(100)
+                    .IsFixedLength(true);
+
+                entity.Property(e => e.Sales).HasColumnType("decimal(18, 10)");
+            });
+
             modelBuilder.Entity<Shipper>(entity =>
             {
                 entity.Property(e => e.ShipperId).HasColumnName("ShipperID");
@@ -290,6 +376,19 @@ namespace OMSWebMini.Data
                     .HasMaxLength(40);
 
                 entity.Property(e => e.Phone).HasMaxLength(24);
+            });
+
+            modelBuilder.Entity<Summary>(entity =>
+            {
+                entity.HasNoKey();
+
+                entity.Property(e => e.AverageCheck).HasColumnType("decimal(18, 10)");
+
+                entity.Property(e => e.MaxCheck).HasColumnType("decimal(18, 10)");
+
+                entity.Property(e => e.MinCheck).HasColumnType("decimal(18, 10)");
+
+                entity.Property(e => e.OverallSales).HasColumnType("decimal(18, 10)");
             });
 
             modelBuilder.Entity<Supplier>(entity =>
