@@ -8,6 +8,7 @@ namespace OMSWebMini.Model
 {
     public partial class Summary
     {
+        public int Id { get; set; }
         public decimal OverallSales { get; set; }
         public int OrdersQuantity { get; set; }
         public decimal MaxCheck { get; set; }

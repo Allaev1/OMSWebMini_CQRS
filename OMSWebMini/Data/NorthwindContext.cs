@@ -95,10 +95,9 @@ namespace OMSWebMini.Data
 
             modelBuilder.Entity<CustomersByCountry>(entity =>
             {
-                entity.HasNoKey();
+                entity.HasKey(e => e.CountryName);
 
                 entity.Property(e => e.CountryName)
-                    .IsRequired()
                     .HasMaxLength(100)
                     .IsFixedLength(true);
             });
@@ -256,10 +255,9 @@ namespace OMSWebMini.Data
 
             modelBuilder.Entity<OrdersByCountry>(entity =>
             {
-                entity.HasNoKey();
+                entity.HasKey(e => e.CountryName);
 
                 entity.Property(e => e.CountryName)
-                    .IsRequired()
                     .HasMaxLength(100)
                     .IsFixedLength(true);
             });
@@ -311,20 +309,18 @@ namespace OMSWebMini.Data
 
             modelBuilder.Entity<ProductsByCategory>(entity =>
             {
-                entity.HasNoKey();
+                entity.HasKey(e => e.CategoryName);
 
                 entity.Property(e => e.CategoryName)
-                    .IsRequired()
                     .HasMaxLength(100)
                     .IsFixedLength(true);
             });
 
             modelBuilder.Entity<PurchasesByCustomer>(entity =>
             {
-                entity.HasNoKey();
+                entity.HasKey(e => e.CompanyName);
 
                 entity.Property(e => e.CompanyName)
-                    .IsRequired()
                     .HasMaxLength(100)
                     .IsFixedLength(true);
 
@@ -333,10 +329,9 @@ namespace OMSWebMini.Data
 
             modelBuilder.Entity<SalesByCategory>(entity =>
             {
-                entity.HasNoKey();
+                entity.HasKey(e => e.CategoryName);
 
                 entity.Property(e => e.CategoryName)
-                    .IsRequired()
                     .HasMaxLength(100)
                     .IsFixedLength(true);
 
@@ -345,10 +340,9 @@ namespace OMSWebMini.Data
 
             modelBuilder.Entity<SalesByCountry>(entity =>
             {
-                entity.HasNoKey();
+                entity.HasKey(e => e.CountryName);
 
                 entity.Property(e => e.CountryName)
-                    .IsRequired()
                     .HasMaxLength(100)
                     .IsFixedLength(true);
 
@@ -357,10 +351,9 @@ namespace OMSWebMini.Data
 
             modelBuilder.Entity<SalesByEmployee>(entity =>
             {
-                entity.HasNoKey();
+                entity.HasKey(e => e.LastName);
 
                 entity.Property(e => e.LastName)
-                    .IsRequired()
                     .HasMaxLength(100)
                     .IsFixedLength(true);
 
@@ -380,7 +373,9 @@ namespace OMSWebMini.Data
 
             modelBuilder.Entity<Summary>(entity =>
             {
-                entity.HasNoKey();
+                entity.Property(e => e.Id)
+                    .ValueGeneratedNever()
+                    .HasColumnName("ID");
 
                 entity.Property(e => e.AverageCheck).HasColumnType("decimal(18, 10)");
 
