@@ -58,10 +58,34 @@ namespace OMSWebMini.Controllers
         [HttpPost]
         public async Task<ActionResult<Product>> PostProduct([FromBody] Product newProduct)
         {
-            northwindContext.Products.Add(newProduct);
-            await northwindContext.SaveChangesAsync();
+            using var transaction = await northwindContext.Database.BeginTransactionAsync();
+
+            try
+            {
+                northwindContext.Products.Add(newProduct);
+
+                await UpdateProductsByCategory(newProduct);
+
+                await northwindContext.SaveChangesAsync();
+                await transaction.CommitAsync();
+            }
+            catch(Exception)
+            {
+                transaction.Rollback();
+                throw;
+            }
 
             return CreatedAtAction(nameof(GetProduct), new { id = newProduct.ProductId }, newProduct);
+        }
+
+        private async Task UpdateProductsByCategory(Product product)
+        {
+            var productByCategory = await northwindContext.ProductsByCategories.FirstOrDefaultAsync(x => x.CategoryName == product.Category.CategoryName);
+
+            if (productByCategory is null)
+                productByCategory.ProductsCount++;
+            else
+                northwindContext.ProductsByCategories.Add(new() { CategoryName = product.Category.CategoryName, ProductsCount = 1 });
         }
 
         // PUT: api/Products/1
