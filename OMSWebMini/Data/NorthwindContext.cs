@@ -351,7 +351,7 @@ namespace OMSWebMini.Data
 
             modelBuilder.Entity<SalesByEmployee>(entity =>
             {
-                entity.HasKey(e => e.LastName);
+                entity.HasKey(e => e.ID);
 
                 entity.Property(e => e.LastName)
                     .HasMaxLength(100)

@@ -8,6 +8,7 @@ namespace OMSWebMini.Model
 {
     public partial class SalesByEmployee
     {
+        public int ID { get; set; }
         public string LastName { get; set; }
         public decimal Sales { get; set; }
     }

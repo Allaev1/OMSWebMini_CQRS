@@ -123,6 +123,7 @@ namespace OMSWebMini
                 () => employees
                 .Select(employee => new SalesByEmployee
                 {
+                    ID = employee.EmployeeId,
                     LastName = employee.LastName,
                     Sales = employee.Orders.Sum(order => order.OrderDetails.Sum(orderDetail => orderDetail.Quantity * orderDetail.UnitPrice))
                 })
@@ -168,8 +169,6 @@ namespace OMSWebMini
                     CompanyName = customer.CompanyName,
                     Purchases = customer.Orders.Sum(order => order.OrderDetails.Sum(orderDetail => orderDetail.Quantity * orderDetail.UnitPrice))
                 })
-                .OrderByDescending(purchasesByCustomer => purchasesByCustomer.Purchases)
-                .Take(10)
                 .ToList());
 
             await northwindContext.PurchasesByCustomers.AddRangeAsync(purchasesByCustomers);
@@ -189,8 +188,6 @@ namespace OMSWebMini
                     CountryName = orderGroup.Key,
                     OrdersCount = orderGroup.Count()
                 })
-                .OrderByDescending(ordersByCountry => ordersByCountry.OrdersCount)
-                .Take(10)
                 .ToListAsync();
 
             await northwindContext.OrdersByCountries.AddRangeAsync(ordersByCountries);
@@ -210,7 +207,6 @@ namespace OMSWebMini
                     CategoryName = orderDetailGroup.Key,
                     Sales = orderDetailGroup.Sum(orderDetail => orderDetail.Quantity * orderDetail.UnitPrice)
                 })
-                .OrderByDescending(salesByCategory => salesByCategory.Sales)
                 .ToListAsync();
 
             await northwindContext.SalesByCategories.AddRangeAsync(salesByCategories);
@@ -230,7 +226,6 @@ namespace OMSWebMini
                     CountryName = orderDetailGroup.Key,
                     Sales = orderDetailGroup.Sum(orderDetail => orderDetail.Quantity * orderDetail.UnitPrice)
                 })
-                .OrderByDescending(salesByCountry => salesByCountry.Sales)
                 .ToListAsync();
 
             await northwindContext.SalesByCountries.AddRangeAsync(salesByCountries);
