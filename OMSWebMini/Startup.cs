@@ -14,6 +14,7 @@ using Microsoft.Extensions.Logging;
 using Microsoft.OpenApi.Models;
 using Microsoft.EntityFrameworkCore;
 using OMSWebMini.Model;
+using Microsoft.EntityFrameworkCore.Storage;
 
 namespace OMSWebMini
 {
@@ -71,8 +72,17 @@ namespace OMSWebMini
 
             //To call await this method track this issue - https://github.com/dotnet/aspnetcore/issues/24142
             //This issue is about async startup
-            SeedStatistics(northwindContext).GetAwaiter().GetResult();
-            SeedSummary(northwindContext).GetAwaiter().GetResult();
+            SeedDataBase(northwindContext).GetAwaiter().GetResult();
+        }
+
+        private async Task SeedDataBase(NorthwindContext northwindContext)
+        {
+            await northwindContext.Database.MigrateAsync();
+
+            await SeedStatistics(northwindContext);
+            await SeedSummary(northwindContext);
+
+            await northwindContext.SaveChangesAsync();
         }
 
         /// <summary>
@@ -88,8 +98,6 @@ namespace OMSWebMini
             await SeedOrdersByCountries(northwindContext);
             await SeedSalesByCategories(northwindContext);
             await SeedSalesByCountries(northwindContext);
-
-            await northwindContext.SaveChangesAsync();
         }
 
         private async Task SeedProductsByCategories(NorthwindContext northwindContext)
