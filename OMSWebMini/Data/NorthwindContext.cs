@@ -93,15 +93,6 @@ namespace OMSWebMini.Data
                 entity.Property(e => e.Region).HasMaxLength(15);
             });
 
-            modelBuilder.Entity<CustomersByCountry>(entity =>
-            {
-                entity.HasKey(e => e.CountryName);
-
-                entity.Property(e => e.CountryName)
-                    .HasMaxLength(100)
-                    .IsFixedLength(true);
-            });
-
             modelBuilder.Entity<Employee>(entity =>
             {
                 entity.HasIndex(e => e.LastName, "LastName");
@@ -253,15 +244,6 @@ namespace OMSWebMini.Data
                     .HasConstraintName("FK_Order_Details_Products");
             });
 
-            modelBuilder.Entity<OrdersByCountry>(entity =>
-            {
-                entity.HasKey(e => e.CountryName);
-
-                entity.Property(e => e.CountryName)
-                    .HasMaxLength(100)
-                    .IsFixedLength(true);
-            });
-
             modelBuilder.Entity<Product>(entity =>
             {
                 entity.HasIndex(e => e.CategoryId, "CategoriesProducts");
@@ -305,6 +287,83 @@ namespace OMSWebMini.Data
                     .WithMany(p => p.Products)
                     .HasForeignKey(d => d.SupplierId)
                     .HasConstraintName("FK_Products_Suppliers");
+            });
+
+            modelBuilder.Entity<Shipper>(entity =>
+            {
+                entity.Property(e => e.ShipperId).HasColumnName("ShipperID");
+
+                entity.Property(e => e.CompanyName)
+                    .IsRequired()
+                    .HasMaxLength(40);
+
+                entity.Property(e => e.Phone).HasMaxLength(24);
+            });
+
+            modelBuilder.Entity<Supplier>(entity =>
+            {
+                entity.HasIndex(e => e.CompanyName, "CompanyName");
+
+                entity.HasIndex(e => e.PostalCode, "PostalCode");
+
+                entity.Property(e => e.SupplierId).HasColumnName("SupplierID");
+
+                entity.Property(e => e.Address).HasMaxLength(60);
+
+                entity.Property(e => e.City).HasMaxLength(15);
+
+                entity.Property(e => e.CompanyName)
+                    .IsRequired()
+                    .HasMaxLength(40);
+
+                entity.Property(e => e.ContactName).HasMaxLength(30);
+
+                entity.Property(e => e.ContactTitle).HasMaxLength(30);
+
+                entity.Property(e => e.Country).HasMaxLength(15);
+
+                entity.Property(e => e.Fax).HasMaxLength(24);
+
+                entity.Property(e => e.HomePage).HasColumnType("ntext");
+
+                entity.Property(e => e.Phone).HasMaxLength(24);
+
+                entity.Property(e => e.PostalCode).HasMaxLength(10);
+
+                entity.Property(e => e.Region).HasMaxLength(15);
+            });
+
+            modelBuilder.Entity<Summary>(entity =>
+            {
+                entity.Property(e => e.Id)
+                    .ValueGeneratedNever()
+                    .HasColumnName("ID");
+
+                entity.Property(e => e.AverageCheck).HasColumnType("decimal(18, 10)");
+
+                entity.Property(e => e.MaxCheck).HasColumnType("decimal(18, 10)");
+
+                entity.Property(e => e.MinCheck).HasColumnType("decimal(18, 10)");
+
+                entity.Property(e => e.OverallSales).HasColumnType("decimal(18, 10)");
+            });
+
+            modelBuilder.Entity<CustomersByCountry>(entity =>
+            {
+                entity.HasKey(e => e.CountryName);
+
+                entity.Property(e => e.CountryName)
+                    .HasMaxLength(100)
+                    .IsFixedLength(true);
+            });
+
+            modelBuilder.Entity<OrdersByCountry>(entity =>
+            {
+                entity.HasKey(e => e.CountryName);
+
+                entity.Property(e => e.CountryName)
+                    .HasMaxLength(100)
+                    .IsFixedLength(true);
             });
 
             modelBuilder.Entity<ProductsByCategory>(entity =>
@@ -358,65 +417,6 @@ namespace OMSWebMini.Data
                     .IsFixedLength(true);
 
                 entity.Property(e => e.Sales).HasColumnType("decimal(18, 10)");
-            });
-
-            modelBuilder.Entity<Shipper>(entity =>
-            {
-                entity.Property(e => e.ShipperId).HasColumnName("ShipperID");
-
-                entity.Property(e => e.CompanyName)
-                    .IsRequired()
-                    .HasMaxLength(40);
-
-                entity.Property(e => e.Phone).HasMaxLength(24);
-            });
-
-            modelBuilder.Entity<Summary>(entity =>
-            {
-                entity.Property(e => e.Id)
-                    .ValueGeneratedNever()
-                    .HasColumnName("ID");
-
-                entity.Property(e => e.AverageCheck).HasColumnType("decimal(18, 10)");
-
-                entity.Property(e => e.MaxCheck).HasColumnType("decimal(18, 10)");
-
-                entity.Property(e => e.MinCheck).HasColumnType("decimal(18, 10)");
-
-                entity.Property(e => e.OverallSales).HasColumnType("decimal(18, 10)");
-            });
-
-            modelBuilder.Entity<Supplier>(entity =>
-            {
-                entity.HasIndex(e => e.CompanyName, "CompanyName");
-
-                entity.HasIndex(e => e.PostalCode, "PostalCode");
-
-                entity.Property(e => e.SupplierId).HasColumnName("SupplierID");
-
-                entity.Property(e => e.Address).HasMaxLength(60);
-
-                entity.Property(e => e.City).HasMaxLength(15);
-
-                entity.Property(e => e.CompanyName)
-                    .IsRequired()
-                    .HasMaxLength(40);
-
-                entity.Property(e => e.ContactName).HasMaxLength(30);
-
-                entity.Property(e => e.ContactTitle).HasMaxLength(30);
-
-                entity.Property(e => e.Country).HasMaxLength(15);
-
-                entity.Property(e => e.Fax).HasMaxLength(24);
-
-                entity.Property(e => e.HomePage).HasColumnType("ntext");
-
-                entity.Property(e => e.Phone).HasMaxLength(24);
-
-                entity.Property(e => e.PostalCode).HasMaxLength(10);
-
-                entity.Property(e => e.Region).HasMaxLength(15);
             });
 
             OnModelCreatingPartial(modelBuilder);
