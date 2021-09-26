@@ -10,8 +10,8 @@ using OMSWebMini.Data;
 namespace OMSWebMini.Migrations
 {
     [DbContext(typeof(NorthwindContext))]
-    [Migration("20210925182844_AddStasticsTablesMigration")]
-    partial class AddStasticsTablesMigration
+    [Migration("20210926054022_AddStatisticsTablesMigration")]
+    partial class AddStatisticsTablesMigration
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {

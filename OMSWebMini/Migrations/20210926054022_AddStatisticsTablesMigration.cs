@@ -3,7 +3,7 @@ using Microsoft.EntityFrameworkCore.Migrations;
 
 namespace OMSWebMini.Migrations
 {
-    public partial class AddStasticsTablesMigration : Migration
+    public partial class AddStatisticsTablesMigration : Migration
     {
         protected override void Up(MigrationBuilder migrationBuilder)
         {
