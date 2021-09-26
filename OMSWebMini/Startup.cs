@@ -241,6 +241,8 @@ namespace OMSWebMini
 
         private async Task SeedSummary(NorthwindContext northwindContext)
         {
+            if (await northwindContext.Summaries.CountAsync() != 0) return;
+
             var overallSales = await northwindContext.OrderDetails.SumAsync(a => a.Quantity * a.UnitPrice);
             var ordersQuantity = await northwindContext.Orders.CountAsync();
             var groupedOrderDetails = northwindContext.OrderDetails.GroupBy(od => od.OrderId);
